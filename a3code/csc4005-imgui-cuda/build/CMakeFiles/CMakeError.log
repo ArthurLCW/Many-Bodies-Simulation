@@ -1,0 +1,61 @@
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/opt/rh/devtoolset-10/root/usr/bin/gmake -f Makefile cmTC_c7333/fast && /opt/rh/devtoolset-10/root/usr/bin/gmake  -f CMakeFiles/cmTC_c7333.dir/build.make CMakeFiles/cmTC_c7333.dir/build
+gmake[1]: Entering directory '/home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c7333.dir/src.cxx.o
+/opt/rh/devtoolset-10/root/usr/bin/g++ -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_c7333.dir/src.cxx.o -c /home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_c7333
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c7333.dir/link.txt --verbose=1
+/opt/rh/devtoolset-10/root/usr/bin/g++ -rdynamic CMakeFiles/cmTC_c7333.dir/src.cxx.o -o cmTC_c7333 
+/opt/rh/devtoolset-10/root/usr/libexec/gcc/x86_64-redhat-linux/10/ld: CMakeFiles/cmTC_c7333.dir/src.cxx.o: in function `main':
+src.cxx:(.text+0x2d): undefined reference to `pthread_create'
+/opt/rh/devtoolset-10/root/usr/libexec/gcc/x86_64-redhat-linux/10/ld: src.cxx:(.text+0x39): undefined reference to `pthread_detach'
+/opt/rh/devtoolset-10/root/usr/libexec/gcc/x86_64-redhat-linux/10/ld: src.cxx:(.text+0x45): undefined reference to `pthread_cancel'
+/opt/rh/devtoolset-10/root/usr/libexec/gcc/x86_64-redhat-linux/10/ld: src.cxx:(.text+0x56): undefined reference to `pthread_join'
+/opt/rh/devtoolset-10/root/usr/libexec/gcc/x86_64-redhat-linux/10/ld: src.cxx:(.text+0x6a): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_c7333.dir/build.make:99: cmTC_c7333] Error 1
+gmake[1]: Leaving directory '/home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_c7333/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/opt/rh/devtoolset-10/root/usr/bin/gmake -f Makefile cmTC_ca6c7/fast && /opt/rh/devtoolset-10/root/usr/bin/gmake  -f CMakeFiles/cmTC_ca6c7.dir/build.make CMakeFiles/cmTC_ca6c7.dir/build
+gmake[1]: Entering directory '/home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ca6c7.dir/CheckFunctionExists.cxx.o
+/opt/rh/devtoolset-10/root/usr/bin/g++   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_ca6c7.dir/CheckFunctionExists.cxx.o -c /home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_ca6c7
+/opt/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ca6c7.dir/link.txt --verbose=1
+/opt/rh/devtoolset-10/root/usr/bin/g++  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_ca6c7.dir/CheckFunctionExists.cxx.o -o cmTC_ca6c7  -lpthreads 
+/opt/rh/devtoolset-10/root/usr/libexec/gcc/x86_64-redhat-linux/10/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_ca6c7.dir/build.make:99: cmTC_ca6c7] Error 1
+gmake[1]: Leaving directory '/home/118010134/files/csc4005-imgui-cuda/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_ca6c7/fast] Error 2
+
+
+
